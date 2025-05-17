@@ -1,6 +1,6 @@
 
-/*! @file CPolynomial.h 
-	@brief A class for polynomial functions 
+/*! @file Polynomial.h 
+	@brief A class for Polynomial functions 
 	@author Alessio Mallamaci e Alessio Pedretti
 
 	Details.
@@ -18,9 +18,9 @@
 
 using namespace std;
 
-/// @class Polynomyal
-/// @brief to manage an object with the shape of a Polynoimial
-//Dichiarazione della classe Polynomial
+/// @class Polynomial
+/// @brief to manage an object of the form:  format: c0+c1*x+ ...
+//Dichiarazione della classe derivata Polynomial
 class Polynomial: public Function 
 {
 protected:
@@ -45,16 +45,15 @@ public:
 
     /// @name BASIC HANDLING
 	/// @{
-    void Init();
-
-	void Reset();                      // Reset ai valori di default											
-	/// @}                                           // Resetta il polinomio (ai valori di default)
+    void Init();				// Inizializzazione standard
+	void Reset();               // Reset ai valori di default											
+	/// @}
 
 	/// @name GETTERS / SETTERS
 	/// @{
 	void SetPolynomial(const double* coefficients, int size); 	// Setter dei coefficienti del polinomio
     
-    double GetValue(double in) const;							// Calcola il valore del polinomio per un certo input
+    double GetValue(double in);							// Calcola il valore del polinomio per un certo input
 	/// @}
 	
 	/// @name DEBUG and SERIALIZATION 

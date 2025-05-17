@@ -1,17 +1,17 @@
-/*! @file CPolynomial.cpp 
+/*! @file Polynomial.cpp 
 	@brief Implementation of Polynomial class 
 	@author Alessio Mallamaci e Alessio Pedretti
 
 	Details.
-*/ 
+*/
 
 #include "Polynomial.h"
 
 /// @brief default constructor
 //Implementazione costruttore di default
 Polynomial::Polynomial() {
-	degree = -1;      // Indica un polinomio non inizializzato (grado = -1)
-    coeff = NULL;     // Nessun coefficiente allocato
+	cout << endl << "-- Polynomial -- costruttore di default --" << endl;
+	Init() ; 							
 }
 
 /// @brief constructor
@@ -19,9 +19,9 @@ Polynomial::Polynomial() {
 ///	@param size size of the array
 // Implementazione costruttore parametrico utile a inizializzare l'oggetto Polynomyal passando l'array dei coefficienti e le dimensioni
 Polynomial::Polynomial(const double* coefficients, int size) {
-
-	degree = -1;      // Inizialmente non definito
-    coeff = NULL;     // Nessun coefficiente allocato
+	
+	cout << endl << "-- Polynomial -- inizializzazione con parametri --" << endl;
+	Init() ; 							
 
     SetPolynomial(coefficients, size);  // Imposta i coefficienti tramite metodo dedicato
 }
@@ -29,14 +29,16 @@ Polynomial::Polynomial(const double* coefficients, int size) {
 /// @brief destructor
 // Implementazione distruttore --> Libera memoria dinamica per evitare errore di "memory leak"
 Polynomial::~Polynomial() {
-    
-	Reset();
+    cout << endl << "-- Polynomial -- distruttore --" << endl;
+	Reset(); 
 }
 
 /// @brief copy constructor
 /// @param p reference to the object that should be copied 
 //Implementazione costruttore di copia (passo by reference un altro oggetto Polynomial)
 Polynomial::Polynomial(const Polynomial& p) {
+	
+	cout << endl << "-- Polynomial -- costruttore di copia --" << endl;
 	
 	int i; //Inizializzo varaibile contatore utilizzata per il ciclo for
 	
@@ -67,6 +69,7 @@ Polynomial::Polynomial(const Polynomial& p) {
 // Implementazione operatore di assegnazione (=) --> Restituisce un riferimento all’oggetto stesso, ovvero *this.
 Polynomial& Polynomial::operator=(const Polynomial& p) {
     
+	cout << endl << "-- Polynomial -- operatore di assegnazione (=) --" << endl;
 	int i; //Inizializzo varaibile contatore utilizzata per il ciclo for
 	
 	if (this != &p) { // Protezione contro autoassegnazione --> verifica se l'oggetto corrente (this) è diverso dall'oggetto che stiamo cercando di assegnare
@@ -96,11 +99,13 @@ Polynomial& Polynomial::operator=(const Polynomial& p) {
 
 
 /// @brief overload of operator == 
-/// @param r reference to the object on the right side of the operator 
+/// @param p reference to the object on the right side of the operator 
 /// @return true if the two objects have the same width and the same length  
 // Implemenetazione operatore di comparazione (==) --> confronta se due oggetti polinomio sono uguali
 bool Polynomial::operator==(const Polynomial& p) {
 	
+	cout << endl << "-- Polynomial -- operatore di comparazione --" << endl;
+
 	int i; //Inizializzo variabile contatore utilizzata per il ciclo for
 	
 	//Confronta se sono dello stesso grado
@@ -114,7 +119,6 @@ bool Polynomial::operator==(const Polynomial& p) {
 	}
 	
 	return true; //Se va tutto bene restituisci vero
-	
 }
 
 
@@ -123,7 +127,7 @@ bool Polynomial::operator==(const Polynomial& p) {
 ///	@param size size of the array
 //Implementazione setter dei parametri dell'oggetto polinomio --> Metodo per impostare i coefficienti del polinomio
 void Polynomial::SetPolynomial(const double* coefficients, int size) {
-	
+
 	int i; //Inizializzo variabile contatore utilizzata per il ciclo for 
 	
 	// Verifico che la dimensione dell'array sia >=1
@@ -156,7 +160,7 @@ void Polynomial::SetPolynomial(const double* coefficients, int size) {
 ///	@param in the input
 ///	@return the value of the function
 // Implementazione getter del metodo che restituisce un double (che rappresenta il valore del polinomio calcolato nel punto in)
-double Polynomial::GetValue(double in) const {
+double Polynomial::GetValue(double in) {
         
 		int i;					//Inizializzo variabile contatore utilizzata per il ciclo for 
 		double x = in;			//Inizializza x con il valore dell’input in.
@@ -172,6 +176,15 @@ double Polynomial::GetValue(double in) const {
         
 		return result; //restituisce il valore del risultato
 }
+
+/// @brief default initialization of the object
+//Implementazione inizializzazione standard
+void Polynomial::Init() {
+
+	degree = -1;      // Indica un polinomio non inizializzato (grado = -1)
+    coeff = NULL;     // Nessun coefficiente allocato
+}
+
 
 /// @brief resets the polynomial 
 // Implementazione del metodo reset --> azzera completamente lo stato interno del polinomio
